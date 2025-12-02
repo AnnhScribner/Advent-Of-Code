@@ -1,9 +1,7 @@
+NUMBER_OF_DIAL_DIGITS = 100
+START = 50
 
-arr = []
-for i in range(100):
-    arr.append(i)
-
-start = 50
+position = START # the dial starts at 50
 count = 0
 
 with open('Dec1/rotations.txt', 'r') as file:
@@ -13,16 +11,15 @@ with open('Dec1/rotations.txt', 'r') as file:
     
     for line in lines:
         l = line.strip()
-        direction = l[0]
-        moves = int(l[1:])
+        direction = l[0] # get direction L/R
+        moves = int(l[1:]) # get the quantity of moviments 
         
-        if direction == 'R':
-            start = (start + moves) % len(arr)
-        elif direction == 'L':
-            start = (start - moves) % len(arr)
+        if direction == 'R': # goes to the right, adding moves to start
+            position = (position + moves) % NUMBER_OF_DIAL_DIGITS
+        elif direction == 'L': # goes to the left, subtracting moves from start
+            position = (position - moves) % NUMBER_OF_DIAL_DIGITS
 
-        number_in_arr = arr[start]
-        if number_in_arr == 0:
+        if position == 0:
             count += 1
 
-print(count)
+print(count) # this is the password for the chalange 1 for Dec 1, 2025
